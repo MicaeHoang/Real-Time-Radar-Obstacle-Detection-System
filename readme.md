@@ -51,3 +51,12 @@ A real-time 180° radar visual system built on the **STM32F429I-DISC1** Discover
 +-----------------------+      +-------------------------+      +------------------------+
 | Active/Passive Buzzer | <--- | TouchGFX Presenter/View | <--- |   `radarMap[181]`      |
 +-----------------------+      +-------------------------+      +------------------------+
+
+<img width="3072" height="4080" alt="953" src="https://github.com/user-attachments/assets/2bd0246c-10a2-4151-a2d4-7b2723176c50" />
+
+youtube: https://www.youtube.com/shorts/u_6eYctj4yQ
+
+
+
+
+
