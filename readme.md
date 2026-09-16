@@ -9,12 +9,23 @@ A real-time 180° radar visual system built on the **STM32F429I-DISC1** Discover
 
 ---
 
-## 📸 Overview & Features
+## 📸 Demo & Overview
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/2bd0246c-10a2-4151-a2d4-7b2723176c50" width="600" alt="Hardware Setup"/>
+</p>
+
+▶️ **Watch the Project Demo on YouTube:**  
+[![Watch the video](https://img.youtube.com/vi/u_6eYctj4yQ/hqdefault.jpg)](https://www.youtube.com/shorts/u_6eYctj4yQ)
+
+---
+
+## ✨ Features
 
 * **180° Radar Sweep:** Dynamic sweep line synced with SG90 Servo PWM output.
 * **1D Kalman Filtering:** Smooths out raw ultrasonic noise and prevents position jumps on distant target detection.
-* **Persistent Mapping:** Custom `RadarCanvas` C++ widget renders all detected obstacle points (`radarMap`) throughout a full $180^\circ$ sweep cycle before resetting.
-* **Proximity Alert:** Integrated GPIO-driven active/passive buzzer providing real-time audio warnings when obstacles are within the hazard zone ($<20\text{ cm}$).
+* **Persistent Mapping:** Custom `RadarCanvas` C++ widget renders all detected obstacle points (`radarMap`) throughout a full 180° sweep cycle before resetting.
+* **Proximity Alert:** Integrated GPIO-driven active/passive buzzer providing real-time audio warnings when obstacles are within the hazard zone (<50cm).
 * **TouchGFX MVP Architecture:** Clean separation between hardware driver tasks (Model/FreeRTOS) and GUI presentation (View/Presenter).
 
 ---
@@ -24,7 +35,7 @@ A real-time 180° radar visual system built on the **STM32F429I-DISC1** Discover
 * **Development Board:** STM32F429I-DISC1 (2.4" QVGA TFT LCD)
 * **Ultrasonic Sensor:** HC-SR04 (5V supply)
 * **Servo Motor:** SG90 Servo
-* **Audio Warning:** Active/Passive 2-pin Buzzer + NPN Transistor (S8050/2N2222) + $1\text{k}\Omega$ Resistor
+* **Audio Warning:** Active/Passive 2-pin Buzzer + NPN Transistor (S8050/2N2222) + 1kΩ Resistor
 * **Power Supply:** External 5V DC power supply for Servo and HC-SR04
 
 ---
@@ -51,12 +62,3 @@ A real-time 180° radar visual system built on the **STM32F429I-DISC1** Discover
 +-----------------------+      +-------------------------+      +------------------------+
 | Active/Passive Buzzer | <--- | TouchGFX Presenter/View | <--- |   `radarMap[181]`      |
 +-----------------------+      +-------------------------+      +------------------------+
-
-<img width="3072" height="4080" alt="953" src="https://github.com/user-attachments/assets/2bd0246c-10a2-4151-a2d4-7b2723176c50" />
-
-youtube: https://www.youtube.com/shorts/u_6eYctj4yQ
-
-
-
-
-
