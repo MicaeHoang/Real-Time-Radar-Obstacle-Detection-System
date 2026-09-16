@@ -1,0 +1,39 @@
+# CubeMX
+.mxproject
+backup_*.ioc
+
+# TouchGFX
+TouchGFX/*_backup.touchgfx
+TouchGFX/build/
+TouchGFX/config/
+TouchGFX/generated/
+TouchGFX/simulator/
+TouchGFX/target.config
+Middlewares/ST/touchgfx/
+Middlewares/ST/touchgfx_components/
+Middlewares/ST/touchgfx_backup*/
+gcc/components.mk
+
+# IAR
+EWARM/settings/
+EWARM/STM32*/
+EWARM/*.dep
+EWARM/*.ewt
+EWARM/*.ipcf
+EWARM/*.custom_argvars
+
+# CubeIDE
+STM32CubeIDE/.settings/
+STM32CubeIDE/Debug/
+STM32CubeIDE/Release/
+
+# Keil
+MDK-ARM/RTE/
+MDK-ARM/STM32*/
+MDK-ARM/DebugConfig/
+MDK-ARM/*.lst
+MDK-ARM/*.out
+MDK-ARM/*vguix.*
+
+# CMake
+build/*
