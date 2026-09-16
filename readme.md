@@ -1,8 +1,53 @@
-# STM32F429I_DISCO_REV_D01 TBS
+# 🛰️ Real-Time Radar Obstacle Detection System
 
-The default IDE is set to STM32CubeIDE, to change IDE open the STM32F429I_DISCO_REV_D01.ioc with STM32CubeMX and select from the supported IDEs (EWARM from version 8.50.9, MDK-ARM, and STM32CubeIDE). Supports flashing of the STM32F429I_DISCO_DEV_D01 board directly from TouchGFX Designer using GCC and STM32CubeProgrammer. Flashing the board requires STM32CubeProgrammer which can be downloaded from the ST webpage. 
+A real-time 180° radar visual system built on the **STM32F429I-DISC1** Discovery kit using an **HC-SR04** ultrasonic sensor, **SG90 Servo**, **Active/Passive Buzzer**, and **TouchGFX** GUI framework.
 
-This TBS is configured for 320 x 240 pixels 16bpp screen resolution.  
+![STM32F429](https://img.shields.io/badge/MCU-STM32F429ZI-blue.svg)
+![FreeRTOS](https://img.shields.io/badge/RTOS-FreeRTOS-green.svg)
+![TouchGFX](https://img.shields.io/badge/GUI-TouchGFX-brightgreen.svg)
+![Language](https://img.shields.io/badge/Language-C%20%2F%20C%2B%2B-orange.svg)
 
-Performance testing can be done using the GPIO pins designated with the following signals: VSYNC_FREQ  - Pin PE2, RENDER_TIME - Pin PE3, FRAME_RATE  - Pin PE4, MCU_ACTIVE  - Pin PE5
- 
+---
+
+## 📸 Overview & Features
+
+* **180° Radar Sweep:** Dynamic sweep line synced with SG90 Servo PWM output.
+* **1D Kalman Filtering:** Smooths out raw ultrasonic noise and prevents position jumps on distant target detection.
+* **Persistent Mapping:** Custom `RadarCanvas` C++ widget renders all detected obstacle points (`radarMap`) throughout a full $180^\circ$ sweep cycle before resetting.
+* **Proximity Alert:** Integrated GPIO-driven active/passive buzzer providing real-time audio warnings when obstacles are within the hazard zone ($<20\text{ cm}$).
+* **TouchGFX MVP Architecture:** Clean separation between hardware driver tasks (Model/FreeRTOS) and GUI presentation (View/Presenter).
+
+---
+
+## 🛠️ Hardware Requirements
+
+* **Development Board:** STM32F429I-DISC1 (2.4" QVGA TFT LCD)
+* **Ultrasonic Sensor:** HC-SR04 (5V supply)
+* **Servo Motor:** SG90 Servo
+* **Audio Warning:** Active/Passive 2-pin Buzzer + NPN Transistor (S8050/2N2222) + $1\text{k}\Omega$ Resistor
+* **Power Supply:** External 5V DC power supply for Servo and HC-SR04
+
+---
+
+## 🔌 Pin Mapping
+
+| Peripheral | STM32 Pin | Function / Description |
+| :--- | :--- | :--- |
+| **HC-SR04 Trigger** | `PB3` | Output (10µs trigger pulse) |
+| **HC-SR04 Echo** | `PB4` | Input (Timer input capture / DWT time calculation) |
+| **SG90 Servo** | `PA0` (TIM2_CH1) | PWM Output (50Hz, 1ms–2ms pulse) |
+| **Buzzer** | `PB7` | GPIO Output (NPN Transistor Base control) |
+
+---
+
+## 📐 System Architecture
+
+```text
++-----------------------+      +-------------------------+      +------------------------+
+| HC-SR04 & SG90 Servo  | ---> |   FreeRTOS Sensor Task  | ---> |   1D Kalman Filter     |
++-----------------------+      +-------------------------+      +------------------------+
+                                                                            |
+                                                                            v
++-----------------------+      +-------------------------+      +------------------------+
+| Active/Passive Buzzer | <--- | TouchGFX Presenter/View | <--- |   `radarMap[181]`      |
++-----------------------+      +-------------------------+      +------------------------+
