@@ -35,7 +35,7 @@ A real-time 180° radar visual system built on the **STM32F429I-DISC1** Discover
 | :--- | :--- | :--- |
 | **HC-SR04 Trigger** | `PB3` | Output (10µs trigger pulse) |
 | **HC-SR04 Echo** | `PB4` | Input (Timer input capture / DWT time calculation) |
-| **SG90 Servo** | `PA0` (TIM2_CH1) | PWM Output (50Hz, 1ms–2ms pulse) |
+| **SG90 Servo** | `PA0` (TIM5_CH1) | PWM Output (50Hz, 1ms–2ms pulse) |
 | **Buzzer** | `PB7` | GPIO Output (NPN Transistor Base control) |
 
 ---
